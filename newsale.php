@@ -8,36 +8,23 @@
 </head>
 <body>
     <?php
-        if ($_SERVER["REQUEST_METHOD"] != "POST") {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $url = "http://localhost:3000/sql";
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            
 
-            $carname = $_POST["carname"];
-            $new_carname = str_replace(" ", "+", $carname);
-            $new_carname = "carname=".$new_carname;
+            $userquery = "CREATE car SET carname='". $_POST["carname"] . "'";
+            $userquery = $userquery . ",email='" . $_POST["email"] . "'";
+            $userquery = $userquery . ",phone='" . $_POST["phone"] . "'";
+            $userquery = $userquery . ",extrainfo='" . $_POST["extrainfo"] . "'";
 
-            $email = $_POST["email"];
-            $new_email = "email=".$email;
-
-            $phone = $_POST["phone"];
-            $new_phone = "phone=".$phone;
-
-            $extrainfo = $_POST["extrainfo"];
-            $new_extrainfo = str_replace(" ", "+", $extrainfo);
-            $new_extrainfo = "carname=".$new_extrainfo;
-
-            $postfields = $new_carname."&".$new_email."&".$new_phone."&".$new_extrainfo;
-
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $postfields);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $userquery);
     
             $headers = array(
                 "NS: torque",
                 "DB: torque",
-                "Content-Type: application/json",
-                "X-Custom-Header: header-value"
+                "Accept: application/json",
             );
             curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($curl, CURLOPT_HEADER, true);
