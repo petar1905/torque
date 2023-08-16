@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <nav>
         <div class="divider"></div>
         <a href="newsale.php">New Sale</a>
@@ -16,5 +15,28 @@
             <input type="submit">
         </form>
     </nav>
+    <?php 
+        $url = "http://localhost:3000/sql";
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $userquery = "SELECT * FROM car";
+
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $userquery);
+
+        $headers = array(
+            "NS: torque",
+            "DB: torque",
+            "Accept: application/json",
+        );
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_HEADER, true);
+        curl_setopt($curl, CURLOPT_USERPWD, "root:root");
+        $response = curl_exec($curl);
+        curl_close($curl);
+        //$response = json_decode($response);
+        echo $response;
+    ?>
 </body>
 </html>
