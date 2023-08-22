@@ -45,7 +45,6 @@
 
         <h1>
             Listings
-            <!--  ?> -->
             <?php 
                 $listings = $response->result;
                 //var_dump($listings);
@@ -55,9 +54,5 @@
             ?>
         </h1>
     </main>
-    <?php var_dump($listings)?>
-
-    
-
 </body>
 </html>
