@@ -9,6 +9,10 @@ nav {
     justify-content: center;
 }
 
+main {
+    text-align: center;
+}
+
 th, td {
     padding: .3em;
 }
@@ -26,9 +30,24 @@ body, * {
 }
 
 table {
-    align-self: center;
+    width: 100%;
 }
 
 textarea {
     resize: none;
+}
+
+#form-container {
+    display: flex;
+    justify-content: center;
+}
+
+#form-container > form {
+    width: 100%;
+    flex: 5;
+}
+
+#form-container > .spacer {
+    width: 100%;
+    flex: 1;
 }
